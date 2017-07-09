@@ -1,0 +1,63 @@
+﻿@model OptimizationNote.Data.DBContext.PUBGOptimization
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table width="900pt">
+    <tr>
+        <td>優化名稱</td>
+        <td>@Html.TextBox("OptimizationName",Model.OptimizationName, new { disabled = "disabled" })</td>
+    </tr>
+    <tr>
+        <td>版本</td>
+        <td>@Html.TextBox("Version", Model.Version, new { disabled = "disabled" })</td>
+    </tr>
+    <tr>
+        <td>說明</td>
+        <td>@Html.TextArea("Description",Model.Description, new { rows = "5", cols = "50" })</td>
+    </tr>
+    <tr>
+        <td>下載網址</td>
+        <td>@Html.TextBox("DownloadURL",Model.DownloadURL)</td>
+    </tr>
+</table>
+</br>
+<button onclick="Update()">儲存</button>
+<button onclick="Reset()">還原資料</button>
+
+@section scripts{
+    <script>
+        function Update()
+        {
+            $.ajax({
+                url: '@Url.Action("Update")',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    SerialNo: @Model.SerialNo,
+                    OptimizationName: $("#OptimizationName").val(),
+                    Version: $("#Version").val(),
+                    DownloadURL: $("#DownloadURL").val(),
+                    Description: $("#Description").val(),
+                },
+                success: function (result) {
+                    if (result.success) {
+                        location.href = '@Url.Action("Index")';
+                    } else {
+                        //$('#SendError').html(result.message);
+                        alert("修改失敗")
+                        Reset();
+                    }
+                }
+            });
+        }
+
+        function Reset()
+        {
+            $("#OptimizationName").val("@Model.OptimizationName");
+            $("#Version").val("@Model.Version");
+            $("#DownloadURL").val("@Model.DownloadURL");
+            $("#Description").val("@Model.Description");
+        }
+    </script>
+}

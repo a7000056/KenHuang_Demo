@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+</br>
+<table width="900pt">
+    <tr>
+        <td>優化名稱</td>
+        <td>@Html.TextBox("OptimizationName")</td>
+    </tr>
+    <tr>
+        <td>版本</td>
+        <td>@Html.TextBox("Version")</td>
+    </tr>
+    <tr>
+        <td>說明</td>
+        <td>@Html.TextArea("Description",new { rows ="5",cols="50"})</td>
+    </tr>
+    <tr>
+        <td>下載網址</td>
+        <td>@Html.TextBox("DownloadURL")</td>
+    </tr>
+</table>
+</br>
+<button onclick="Add()">新增</button>
+<button onclick="Reset()">清除資料</button>
+
+@section scripts{
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        function Add()
+        {
+            $.ajax({
+                url: '@Url.Action("Add")',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    OptimizationName: $("#OptimizationName").val(),
+                    Version: $("#Version").val(),
+                    DownloadURL: $("#DownloadURL").val(),
+                    Description: $("#Description").val(),
+                },
+                success: function (result) {
+                    if (result.success) {
+                        location.href = '@Url.Action("Index")';
+                    } else {
+                        //$('#SendError').html(result.message);
+                        alert("新增失敗")
+                        Reset();
+                    }
+                }
+            });
+        }
+
+        function Reset()
+        {
+            $("#OptimizationName").val("");
+            $("#Version").val("");
+            $("#DownloadURL").val("");
+            $("#Description").val("");
+        }
+    </script>
+}
