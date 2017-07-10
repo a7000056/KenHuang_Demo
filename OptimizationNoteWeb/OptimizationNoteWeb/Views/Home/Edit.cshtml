@@ -1,32 +1,28 @@
 ﻿@model OptimizationNoteWeb.Models.DbContext.PUBGOptimization
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <table width="900pt">
     <tr>
         <td>優化名稱</td>
-        <td>@Html.TextBox("OptimizationName",Model.OptimizationName, new { disabled = "disabled" })</td>
+        <td>@Html.TextBox("E_OptimizationName",Model.OptimizationName, new { disabled = "disabled" })</td>
     </tr>
     <tr>
         <td>版本</td>
-        <td>@Html.TextBox("Version", Model.Version, new { disabled = "disabled" })</td>
+        <td>@Html.TextBox("E_Version", Model.Version, new { disabled = "disabled" })</td>
     </tr>
     <tr>
         <td>說明</td>
-        <td>@Html.TextArea("Description",Model.Description, new { rows = "5", cols = "50" })</td>
+        <td>@Html.TextBox("E_Description", Model.Description)</td>
     </tr>
     <tr>
         <td>下載網址</td>
-        <td>@Html.TextBox("DownloadURL",Model.DownloadURL)</td>
+        <td>@Html.TextBox("E_DownloadURL", Model.DownloadURL)</td>
     </tr>
 </table>
 </br>
 <button onclick="Update()">儲存</button>
-<button onclick="Reset()">還原資料</button>
+<button onclick="ResetEditData()">還原資料</button>
 
-@section scripts{
-    <script>
+<script>
         function Update()
         {
             $.ajax({
@@ -35,14 +31,14 @@
                 dataType: "json",
                 data: {
                     SerialNo: @Model.SerialNo,
-                    OptimizationName: $("#OptimizationName").val(),
-                    Version: $("#Version").val(),
-                    DownloadURL: $("#DownloadURL").val(),
-                    Description: $("#Description").val(),
+                    OptimizationName: $("#E_OptimizationName").val(),
+                    Version: $("#E_Version").val(),
+                    DownloadURL: $("#E_DownloadURL").val(),
+                    Description: $("#E_Description").val(),
                 },
                 success: function (result) {
                     if (result.success) {
-                        location.href = '@Url.Action("Index")';
+                        ReadView();
                     } else {
                         //$('#SendError').html(result.message);
                         alert("修改失敗")
@@ -52,12 +48,11 @@
             });
         }
 
-        function Reset()
+        function ResetEditData()
         {
-            $("#OptimizationName").val("@Model.OptimizationName");
-            $("#Version").val("@Model.Version");
-            $("#DownloadURL").val("@Model.DownloadURL");
-            $("#Description").val("@Model.Description");
+            $("#E_OptimizationName").val("@Model.OptimizationName");
+            $("#E_Version").val("@Model.Version");
+            $("#E_DownloadURL").val("@Model.DownloadURL");
+            $("#E_Description").val('@Model.Description.Replace("\r\n","</br>")');
         }
-    </script>
-}
+</script>

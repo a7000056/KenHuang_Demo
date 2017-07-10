@@ -1,56 +1,42 @@
-﻿@model List<OptimizationNoteWeb.Models.DbContext.PUBGOptimization>
-@{
+﻿@{
     ViewBag.Title = "絕地求生 優化筆記";
 }
 
-</br>
-<button onclick="location.href='@Url.Action("Insert")'">新增優化紀錄</button>
-</br>
-<table width="1000pt">
-    <tr>
-        <th>優化名稱</th>
-        <th>版本</th>
-        <th width="500pt">優化說明</th>
-        <th>下載網址</th>
-        <th width="100pt">功能</thwidth="100pt">
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <th>@item.OptimizationName</th>
-            <th>@item.Version</th>
-            <th>@item.Description</th>
-            <th><a href="@item.DownloadURL" target="new">@item.DownloadURL</a></th>
-            <th>
-                <button onclick="location.href='@Url.Action("Edit",new { serialNo=item.SerialNo })'">修改</button>
-                <button onclick="Delete('@item.SerialNo')">刪除</button>
-            </th>
-        </tr>
-    }
-</table>
-
-<div style="display:none;" id="SendError"></div>
+<div id="ReadView"></div>
+<div id="AddView"></div>
+<div id="EditView"></div>
+<div id="ErrorView"></div>
 
 @section scripts{
     <script>
-        function Delete(serialNo)
+        $(document).ready(function () {
+            ReadView();
+        });
+
+        function HideView()
+        {
+            $("#AddView").html('');
+            $("#ErrorView").html('');
+            $("#EditView").html('');
+        }
+
+        function ReadView()
         {
             $.ajax({
-                url: '@Url.Action("Delete")',
+                url: '@Url.Action("Read")',
                 type: 'POST',
-                dataType: "json",
+                dataType: "html",
                 data: {
-                    serialNo: serialNo
                 },
+                cache: false,
                 success: function (result) {
-                    if (result.success) {
-                        location.href = '@Url.Action("Index")'
-                    } else {
-                        //$('#SendError').html(result.message);
-                        alert("刪除失敗");
-                    }
-                }
+                    $("#ReadView").html(result);
+                    HideView();
+                },
+                error: function (result) {
+                    $("#ErrorView").html(result.responseText);
+                    $("#ErrorView").show();
+                },
             });
         }
     </script>

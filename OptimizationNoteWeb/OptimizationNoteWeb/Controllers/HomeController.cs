@@ -9,23 +9,31 @@ namespace OptimizationNoteWeb.Controllers
     {
         public ActionResult Index()
         {
-            var db = new Ken_DemoEntities();
-            var query = db.PUBGOptimization.ToList();
-
-            return View(query);
-        }
-
-        public ActionResult Insert()
-        {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Insert()
+        {
+            return PartialView("Insert");
+        }
+
+        [HttpPost]
+        public ActionResult Read()
+        {
+            var db = new Ken_DemoEntities();
+            var query = db.PUBGOptimization.ToList();
+
+            return PartialView("Read", query);
+        }
+
+        [HttpPost]
         public ActionResult Edit(int serialNo)
         {
             var db = new Ken_DemoEntities();
             var query = db.PUBGOptimization.FirstOrDefault(o => o.SerialNo == serialNo);
 
-            return View(query);
+            return PartialView("Edit", query);
         }
 
         public ActionResult Delete(int serialNo)

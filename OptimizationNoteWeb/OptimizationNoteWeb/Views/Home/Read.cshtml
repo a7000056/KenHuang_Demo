@@ -1,0 +1,90 @@
+﻿@model List<OptimizationNoteWeb.Models.DbContext.PUBGOptimization>
+
+</br>
+<button onclick="AddView()">新增優化紀錄</button>
+</br>
+<table width="1000pt">
+    <tr>
+        <th width="100pt">優化名稱</th>
+        <th width="100pt">版本</th>
+        <th width="500pt">優化說明</th>
+        <th>下載網址</th>
+        <th width="100pt">功能</thwidth="100pt">
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.OptimizationName</th>
+            <th>@item.Version</th>
+            <th>@item.Description</th>
+            <th><a href="@item.DownloadURL" target="new">@item.DownloadURL</a></th>
+            <th>
+                <button onclick="EditView('@item.SerialNo')">修改</button>
+                <button onclick="Delete('@item.SerialNo')">刪除</button>
+            </th>
+        </tr>
+    }
+</table>
+
+<script>
+    function Delete(serialNo) {
+        $.ajax({
+            url: '@Url.Action("Delete")',
+            type: 'POST',
+            dataType: "json",
+            data: {
+                serialNo: serialNo
+            },
+            success: function (result) {
+                if (result.success) {
+                    ReadView();
+                } else {
+                    //$('#SendError').html(result.message);
+                    alert("刪除失敗");
+                }
+            }
+        });
+    }
+
+    function AddView() {
+        HideView();
+
+        $.ajax({
+            url: '@Url.Action("Insert")',
+            type: 'POST',
+            dataType: "html",
+            data: {
+            },
+            success: function (result) {
+                $("#AddView").html(result);
+                $("#AddView").show();
+            },
+            error: function (result) {
+                $("#ErrorView").html(result.responseText);
+                $("#ErrorView").show();
+            },
+        });
+    }
+
+    function EditView(serialNo) {
+        HideView();
+
+        $.ajax({
+            url: '@Url.Action("Edit")',
+            type: 'POST',
+            dataType: "html",
+            data: {
+                serialNo: serialNo
+            },
+            success: function (result) {
+                $("#EditView").html(result);
+                $("#EditView").show();
+            },
+            error: function (result) {
+                $("#ErrorView").html(result.responseText);
+                $("#ErrorView").show();
+            },
+        });
+    }
+</script>
