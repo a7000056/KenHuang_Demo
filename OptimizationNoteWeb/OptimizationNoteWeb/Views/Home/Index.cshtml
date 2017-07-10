@@ -1,4 +1,4 @@
-﻿@model List<OptimizationNote.Data.DBContext.PUBGOptimization>
+﻿@model List<OptimizationNoteWeb.Models.DbContext.PUBGOptimization>
 @{
     ViewBag.Title = "絕地求生 優化筆記";
 }
@@ -6,13 +6,13 @@
 </br>
 <button onclick="location.href='@Url.Action("Insert")'">新增優化紀錄</button>
 </br>
-<table width="900pt">
+<table width="1000pt">
     <tr>
         <th>優化名稱</th>
         <th>版本</th>
-        <th>優化說明</th>
+        <th width="500pt">優化說明</th>
         <th>下載網址</th>
-        <th>功能</th>
+        <th width="100pt">功能</thwidth="100pt">
     </tr>
 
     @foreach (var item in Model)

@@ -88,6 +88,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -160,6 +162,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbContext\Ken_Demo.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ken_Demo.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbContext\Ken_Demo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ken_Demo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbContext\Ken_Demo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ken_Demo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbContext\PUBGOptimization.cs">
+      <DependentUpon>Ken_Demo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +189,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DbContext\Ken_Demo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ken_Demo.edmx</DependentUpon>
+      <LastGenOutput>Ken_Demo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DbContext\Ken_Demo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ken_Demo.edmx</DependentUpon>
+      <LastGenOutput>Ken_Demo.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\DbContext\Ken_Demo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ken_Demo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbContext\Ken_Demo.edmx.diagram">
+      <DependentUpon>Ken_Demo.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -203,7 +240,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -214,10 +250,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OptimizationNote.Data\OptimizationNote.Data.csproj">
-      <Project>{f4d8c264-05f3-427b-a117-2b6543b64c7e}</Project>
-      <Name>OptimizationNote.Data</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OptimizationNoteWeb.Models.DbContext;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using OptimizationNote.Data.DBContext;
 
 namespace OptimizationNoteWeb.Controllers
 {
@@ -12,7 +10,7 @@ namespace OptimizationNoteWeb.Controllers
         public ActionResult Index()
         {
             var db = new Ken_DemoEntities();
-            var query=db.PUBGOptimization.ToList();
+            var query = db.PUBGOptimization.ToList();
 
             return View(query);
         }
@@ -25,7 +23,7 @@ namespace OptimizationNoteWeb.Controllers
         public ActionResult Edit(int serialNo)
         {
             var db = new Ken_DemoEntities();
-            var query = db.PUBGOptimization.FirstOrDefault(o=>o.SerialNo==serialNo);
+            var query = db.PUBGOptimization.FirstOrDefault(o => o.SerialNo == serialNo);
 
             return View(query);
         }
@@ -65,7 +63,7 @@ namespace OptimizationNoteWeb.Controllers
             {
                 result = false;
             }
-            
+
             return Json(new { success = result });
         }
 
@@ -77,7 +75,7 @@ namespace OptimizationNoteWeb.Controllers
             {
                 var db = new Ken_DemoEntities();
                 var query = db.PUBGOptimization.FirstOrDefault(o => o.SerialNo == model.SerialNo);
-                
+
                 query.DownloadURL = model.DownloadURL;
                 query.Description = model.Description;
 

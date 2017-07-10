@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptimizationNoteWeb", "OptimizationNoteWeb\OptimizationNoteWeb.csproj", "{89984123-83AD-400D-8EED-920C4F3A4024}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptimizationNote.Data", "OptimizationNote.Data\OptimizationNote.Data.csproj", "{F4D8C264-05F3-427B-A117-2B6543B64C7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{89984123-83AD-400D-8EED-920C4F3A4024}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89984123-83AD-400D-8EED-920C4F3A4024}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89984123-83AD-400D-8EED-920C4F3A4024}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4D8C264-05F3-427B-A117-2B6543B64C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4D8C264-05F3-427B-A117-2B6543B64C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4D8C264-05F3-427B-A117-2B6543B64C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4D8C264-05F3-427B-A117-2B6543B64C7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
