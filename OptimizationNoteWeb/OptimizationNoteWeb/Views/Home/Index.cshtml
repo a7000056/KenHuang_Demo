@@ -15,13 +15,16 @@
 
         function HideView()
         {
-            $("#AddView").html('');
-            $("#ErrorView").html('');
-            $("#EditView").html('');
+            $("#ReadView").hide();
+            $("#AddView").hide();
+            $("#ErrorView").hide();
+            $("#EditView").hide();
         }
 
         function ReadView()
         {
+            HideView();
+
             $.ajax({
                 url: '@Url.Action("Read")',
                 type: 'POST',
@@ -31,7 +34,7 @@
                 cache: false,
                 success: function (result) {
                     $("#ReadView").html(result);
-                    HideView();
+                    $("#ReadView").show();
                 },
                 error: function (result) {
                     $("#ErrorView").html(result.responseText);
